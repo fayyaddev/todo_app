@@ -9,20 +9,19 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Dismissible(
-      key: ObjectKey(task),
-      onDismissed: (direction) {
-        Provider.of<DBProvider>(context, listen: false).deleteTask(task);
-      },
-      child: Card(
-        child: ListTile(
-          title: Text(task.title),
-          trailing: Checkbox(
-            value: task.isComplete,
-            onChanged: (value) {
-              Provider.of<DBProvider>(context, listen: false).updateTask(task);
-            },
-          ),
+    return Card(
+      child: ListTile(
+        leading: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              Provider.of<DBProvider>(context, listen: false).deleteTask(task);
+            }),
+        title: Text(task.title),
+        trailing: Checkbox(
+          value: task.isComplete,
+          onChanged: (value) {
+            Provider.of<DBProvider>(context, listen: false).updateTask(task);
+          },
         ),
       ),
     );

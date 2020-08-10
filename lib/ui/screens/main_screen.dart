@@ -81,86 +81,90 @@ class MainScreen extends StatelessWidget {
               }
             },
           ),
-          floatingActionButton: FloatingActionButton(onPressed: () {
-            showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                builder: (BuildContext context) {
-                  return Padding(
-                    padding: MediaQuery.of(context).viewInsets,
-                    child: Form(
-                      key: formKey,
-                      child: CupertinoActionSheet(
-                        actions: <Widget>[
-                          CupertinoActionSheetAction(
-                            onPressed: () {},
-                            child: Card(
-                              color: Colors.transparent,
-                              elevation: 0.0,
-                              child: TextFormField(
-                                validator: (value) {
-                                  // ignore: missing_return
-                                  if (value.isEmpty) {
-                                    return 'text title is required';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  labelText: 'Title',
-                                  fillColor: Colors.grey[200],
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+          floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: Form(
+                          key: formKey,
+                          child: CupertinoActionSheet(
+                            actions: <Widget>[
+                              CupertinoActionSheetAction(
+                                onPressed: () {},
+                                child: Card(
+                                  color: Colors.transparent,
+                                  elevation: 0.0,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      // ignore: missing_return
+                                      if (value.isEmpty) {
+                                        return 'text title is required';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Title',
+                                      fillColor: Colors.grey[200],
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                    ),
+                                    onSaved: (value) {
+                                      setTitle(value);
+                                    },
+                                  ),
                                 ),
-                                onSaved: (value) {
-                                  setTitle(value);
+                              ),
+                              CupertinoActionSheetAction(
+                                onPressed: () {
+                                  submitTask(context);
                                 },
+                                child: Card(
+                                  color: Colors.transparent,
+                                  elevation: 0.0,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      // ignore: missing_return
+                                      if (value.isEmpty) {
+                                        return 'text description is required';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Description',
+                                      fillColor: Colors.grey[200],
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                    ),
+                                    onSaved: (value) {
+                                      setDescription(value);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                            cancelButton: CupertinoActionSheetAction(
+                              onPressed: () {
+                                submitTask(context);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text('Submit'),
                               ),
                             ),
-                          ),
-                          CupertinoActionSheetAction(
-                            onPressed: () {
-                              submitTask(context);
-                            },
-                            child: Card(
-                              color: Colors.transparent,
-                              elevation: 0.0,
-                              child: TextFormField(
-                                validator: (value) {
-                                  // ignore: missing_return
-                                  if (value.isEmpty) {
-                                    return 'text description is required';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  labelText: 'Description',
-                                  fillColor: Colors.grey[200],
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                ),
-                                onSaved: (value) {
-                                  setDescription(value);
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                        cancelButton: CupertinoActionSheetAction(
-                          onPressed: () {
-                            submitTask(context);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text('Submit'),
                           ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-                context: context);
-          }),
+                      );
+                    },
+                    context: context);
+              }),
         ));
   }
 }
